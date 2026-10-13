@@ -5,6 +5,8 @@ import io.github.dekabrsky.androidMidSemester.data.api.SStatsApi
 import io.github.dekabrsky.androidMidSemester.data.mapper.toMatch
 import io.github.dekabrsky.androidMidSemester.domain.model.Match
 import io.github.dekabrsky.androidMidSemester.domain.repository.MatchRepository
+import io.github.dekabrsky.androidMidSemester.domain.model.Team
+import io.github.dekabrsky.androidMidSemester.data.mapper.toDomain
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import java.time.LocalDate
@@ -44,4 +46,6 @@ class MatchRepositoryImpl(
 
     override suspend fun match(id: Long): Match =
         api.game(id).data?.toMatch() ?: throw NoSuchElementException("Матч $id не найден")
+    override suspend fun teamsByCountry(country: String): List<Team> =
+        api.teams(country).data.map { it.toDomain() }
 }

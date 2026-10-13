@@ -1,6 +1,7 @@
 package io.github.dekabrsky.androidMidSemester.data.repository
 
 import android.util.Log
+import io.github.dekabrsky.androidMidSemester.domain.model.Team
 import io.github.dekabrsky.androidMidSemester.data.api.espn.EspnApi
 import io.github.dekabrsky.androidMidSemester.data.mapper.toMatch
 import io.github.dekabrsky.androidMidSemester.domain.model.Match
@@ -37,4 +38,6 @@ class EspnMatchRepositoryImpl(
 
     override suspend fun match(id: Long): Match =
         throw UnsupportedOperationException("Детали по id пока не реализованы в ESPN-репозитории")
+    override suspend fun teamsByCountry(country: String): List<Team> =
+        throw UnsupportedOperationException("Команды грузятся через sstats")
 }
